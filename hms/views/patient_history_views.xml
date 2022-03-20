@@ -1,0 +1,48 @@
+<odoo>
+
+    <data>
+
+        <record id="history_tree_view" model="ir.ui.view">
+
+            <field name="name">history tree view</field>
+            <field name="model">patient.history</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="created_by"/>
+                    <field name="date"/>
+
+                </tree>
+            </field>
+
+        </record>
+         <record id="history_form_view" model="ir.ui.view">
+            <field name="name">history form view</field>
+            <field name="model">patient.history</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="created_by"/>
+                                <field name="date"/>
+                                <field name="description"/>
+                                <field name="patient_id"/>
+
+                            </group>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+         <record id="history_action" model="ir.actions.act_window">
+            <field name="name">History</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">patient.history</field>
+            <field name="view_mode">tree,form</field>
+          </record>
+          <menuitem id="patient_history_menu" name="History" action="history_action" parent="patient_root_menu"/>
+    </data>
+</odoo>

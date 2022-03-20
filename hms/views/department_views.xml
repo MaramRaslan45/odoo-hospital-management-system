@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+
+         <record id="department_tree_view" model="ir.ui.view">
+
+            <field name="name">department tree view</field>
+            <field name="model">hms.department</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="Capacity"/>
+                    <field name="Is_opened"/>
+                </tree>
+            </field>
+
+        </record>
+
+
+         <record id="department_form_view" model="ir.ui.view">
+            <field name="name">department form view</field>
+            <field name="model">hms.department</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                 <field name="Capacity"/>
+
+                            </group>
+                            <group>
+                               <field name="Is_opened"/>
+
+                            </group>
+                             <notebook>
+                                    <page string="Patients">
+                                        <field name="patient_ids"/>
+                                    </page>
+                                </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+         <record id="department_action" model="ir.actions.act_window">
+            <field name="name">Department</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hms.department</field>
+            <field name="view_mode">tree,form</field>
+          </record>
+          <menuitem id="hms_department_menu" name="Departments" action="department_action" parent="patient_root_menu"/>
+    </data>
+</odoo>

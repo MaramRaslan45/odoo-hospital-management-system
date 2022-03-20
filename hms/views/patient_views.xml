@@ -1,0 +1,71 @@
+<odoo>
+    <data>
+        <record id="patient_tree_view" model="ir.ui.view">
+
+            <field name="name">patient tree view</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="firstname"/>
+                    <field name="lastname"/>
+
+                </tree>
+            </field>
+
+        </record>
+
+        <record id="patient_form_view" model="ir.ui.view">
+            <field name="name">patient form view</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                          <field name="state" widget="statusbar"/>
+                        <button type="object" name="next_stage" string="Next Stage" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="firstname" required="True"/>
+                                <field name="lastname" required="True"/>
+                                <field name="email" />
+                                <field name="birthdate"/>
+                                 <field name="history" />
+                                 <field name="CR_Ratio" attrs="{'required': [('PCR', '=', True)]}"/>
+                                 <field name="department_id" domain="[('Is_opened', '=', True)]"/>
+                                 <field name="Capacity"/>
+
+                            </group>
+                            <group>
+                                <field name="Blood_Type" widget="selection"/>
+                                <field name="PCR" widget="checkbox"/>
+                                <field name="image" widget="image"/>
+                                <field name="Address"/>
+                                <field name="Age"/>
+                                <field name="doctors_ids" widget="many2many_tags" attrs="{'readonly': [('department_id', '=', False)]}"/>
+
+                            </group>
+
+                                <notebook>
+                                    <page string="History">
+                                        <field name="history_ids" attrs="{'invisible': [('Age', '&lt;' , '50')]}"/>
+                                    </page>
+                                </notebook>
+
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+          <record id="patient_action" model="ir.actions.act_window">
+            <field name="name">Patient</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hms.patient</field>
+            <field name="view_mode">tree,form</field>
+          </record>
+          <menuitem id="patient_root_menu" name="Patient" sequence="1"/>
+          <menuitem id="patient_sub_menu" name="Patients" action="patient_action" parent="patient_root_menu"/>
+    </data>
+</odoo>
